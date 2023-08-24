@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:mosmetro_wear/bloc/route/route_event.dart';
 import 'package:mosmetro_wear/bloc/route/route_state.dart';
 
-class RouteBloc extends Bloc<RouteEvent, RouteState> {
+final class RouteBloc extends Bloc<RouteEvent, RouteState> {
   RouteBloc() : super(const RouteState(route: null)) {
     on<RouteEvent>(
       (event, emit) => switch (event) {
@@ -19,12 +19,12 @@ class RouteBloc extends Bloc<RouteEvent, RouteState> {
   void _onNextStation(Emitter<RouteState> emit) {
     if (state.route == null) return;
 
-    if (state.currentStation >= state.route!.length - 1) {
+    if (state.isLastStation) {
       emit(const RouteState(route: null));
     } else {
       emit(
         state.copyWith(
-          currentStation: state.currentStation + 1,
+          currentStationIndex: state.currentStationIndex + 1,
         ),
       );
     }

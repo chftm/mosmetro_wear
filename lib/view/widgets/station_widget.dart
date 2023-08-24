@@ -22,6 +22,7 @@ class StationWidget extends StatelessWidget {
           Container(
             decoration: stationCircle == StationCircle.outlined
                 ? const BoxDecoration(
+                    color: const Color.fromARGB(255, 51, 51, 51),
                     border: Border.fromBorderSide(
                       BorderSide(
                         color: Colors.lightBlue,

@@ -7,13 +7,16 @@ import 'package:sensors_plus/sensors_plus.dart';
 final class MovementRepository {
   final double thresholdVelocity;
 
-  Stream<bool> get movement => userAccelerometerEvents.map(
+  Stream<bool> get movement => userAccelerometerEvents
+      .map(
         (event) {
           final acceleration = sqrt(event.x * event.x + event.z * event.z);
 
           return acceleration >= thresholdVelocity;
         },
-      ).distinct();
+      )
+      .distinct()
+      .asBroadcastStream();
 
   const MovementRepository({required this.thresholdVelocity});
 }

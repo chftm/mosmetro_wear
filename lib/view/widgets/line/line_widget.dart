@@ -64,7 +64,7 @@ class LineWidget extends StatelessWidget {
                       style: const TextStyle(fontWeight: FontWeight.w500),
                     ),
                     Text(
-                      '(${middleStations * 3} мин)',
+                      '(${middleStations * 4} мин)',
                       style: const TextStyle(
                         color: Colors.grey,
                         fontWeight: FontWeight.w500,

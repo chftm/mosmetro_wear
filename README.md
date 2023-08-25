@@ -1,16 +1,14 @@
-# mosmetro_wear
+![Статус проекта: Завершен](https://raw.githubusercontent.com/chftm/brand/main/Project%20Status/finished.svg)
 
-A new Flutter project.
+# MosMetro Wear
 
-## Getting Started
+## О проекте
 
-This project is a starting point for a Flutter application.
+Прототип приложения "Московское Метро" под смарт-часы.
 
-A few resources to get you started if this is your first Flutter project:
+Разработан в рамках хакатона [Drive IT 2.0](https://ya-doma.ru/drivehack-2023/).
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Запуск
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Приложение разработано для wearOS, но предназначено для демонстрации на
+смартфонах. Вы можете запустить его на своем смартфоне через `flutter run`.

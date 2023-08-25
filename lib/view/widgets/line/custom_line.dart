@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 
 class CustomLine extends CustomPainter {
+  final double lineRatio;
+  final Color color;
+
   const CustomLine({
     required this.lineRatio,
     required this.color,
   });
 
-  final double lineRatio;
-  final Color color;
-
   @override
+  // It's still readable.
+  // ignore: long-method
   void paint(Canvas canvas, Size size) {
     final linePaint = Paint()
       ..color = Colors.lightBlue
@@ -17,7 +19,11 @@ class CustomLine extends CustomPainter {
       ..strokeCap = StrokeCap.round;
 
     if (lineRatio == 0) {
-      canvas..drawLine(Offset(20, 55), Offset(20, size.height - 40), linePaint);
+      canvas.drawLine(
+        const Offset(20, 55),
+        Offset(20, size.height - 40),
+        linePaint,
+      );
     } else {
       canvas
         ..drawLine(

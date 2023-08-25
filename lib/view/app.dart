@@ -14,7 +14,7 @@ class App extends StatelessWidget {
         useMaterial3: true,
         visualDensity: VisualDensity.compact,
         colorScheme: const ColorScheme.dark().copyWith(
-          background: const Color.fromARGB(255, 51, 51, 51),
+          background: const Color(0xff333333),
         ),
         fontFamily: 'Ubuntu',
       ),

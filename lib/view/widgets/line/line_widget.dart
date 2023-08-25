@@ -10,7 +10,7 @@ class LineWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
-      painter: const CustomLine(lineRatio: 6/11, color: Colors.lightBlue),
+      painter: const CustomLine(lineRatio: 6 / 11, color: Colors.lightBlue),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -35,7 +35,10 @@ class LineWidget extends StatelessWidget {
                   ),
                   Text(
                     '(8 мин)',
-                    style: TextStyle(fontWeight: FontWeight.w500, color: Colors.grey),
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ],
               ),

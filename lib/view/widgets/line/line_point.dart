@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mosmetro_wear/view/widgets/line/station_widget.dart';
-
-enum PointType { number, fill, outline }
 
 class LinePoint extends StatelessWidget {
   const LinePoint({
@@ -32,7 +29,6 @@ class LinePoint extends StatelessWidget {
             number.toString(),
             style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             textAlign: TextAlign.center,
-
           ),
         );
       case PointType.fill:
@@ -64,3 +60,5 @@ class LinePoint extends StatelessWidget {
     return pointWidget;
   }
 }
+
+enum PointType { number, fill, outline }

@@ -31,7 +31,11 @@ class StationWidget extends StatelessWidget {
             Expanded(
               child: Text(
                 station.name,
-                style: const TextStyle(fontSize: 23, height: 1, fontWeight: FontWeight.bold),
+                style: const TextStyle(
+                  fontSize: 23,
+                  fontWeight: FontWeight.bold,
+                  height: 1,
+                ),
               ),
             ),
           ],

@@ -33,6 +33,8 @@ dependencies:
     sdk: flutter
   flutter_bloc: ^8.1.3
   sensors_plus: ^3.0.3
+  slider_button: ^2.0.0
+  smooth_page_indicator: ^1.1.0
 
 dev_dependencies:
   merch_lints: ^2.2.0

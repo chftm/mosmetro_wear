@@ -1,31 +1,66 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mosmetro_wear/bloc/movement/movement_bloc.dart';
-import 'package:mosmetro_wear/bloc/route/route_bloc.dart';
-import 'package:mosmetro_wear/bloc/route/route_event.dart';
-import 'package:mosmetro_wear/bloc/route/route_state.dart';
 import 'package:mosmetro_wear/view/widgets/line/line_widget.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class RouteScreen extends StatelessWidget {
+class RouteScreen extends StatefulWidget {
   const RouteScreen({super.key});
 
   @override
+  State<RouteScreen> createState() => _RouteScreenState();
+}
+
+class _RouteScreenState extends State<RouteScreen> {
+  final controller = PageController(
+    initialPage: 0,
+    keepPage: true,
+    viewportFraction: 1,
+  );
+
+  final List<Widget> pages = [
+    // LineWidget(),
+    // LineWidget(),
+    // LineWidget(),
+  ];
+
+  void onSliderSwipe() {
+    Navigator.pop(context);
+  }
+
+  // showCupertinoModalPopup(
+  //   context: context,
+  //   builder: (ctx) {
+  //     return TransferScreen(
+  //       onSliderSwipe: onSliderSwipe,
+  //     );
+  //   },
+  // );
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocBuilder<RouteBloc, RouteState>(
-        builder: (_, state) => BlocListener<MovementBloc, bool>(
-          listener: (_, moving) {
-            if (moving) {
-              context.read<RouteBloc>().add(const NextStation());
-            }
-          },
-          child: LineWidget(
-            routeSegment:
-                state.currentSegment!.sublist(state.currentStationIndex),
-            first: state.isFirstInSegment,
+    return Row(
+      children: [
+        Expanded(
+          child: PageView.builder(
+            scrollDirection: Axis.vertical,
+            controller: controller,
+            itemBuilder: (ctx, index) {
+              return pages[index];
+            },
+            itemCount: pages.length,
           ),
         ),
-      ),
+        SmoothPageIndicator(
+          controller: controller,
+          count: pages.length,
+          axisDirection: Axis.vertical,
+          effect: const ExpandingDotsEffect(
+            dotWidth: 8,
+            dotHeight: 8,
+            activeDotColor: Colors.white,
+            dotColor: Colors.grey,
+          ),
+        ),
+      ],
     );
   }
 }

@@ -4,7 +4,7 @@ import 'package:slider_button/slider_button.dart';
 class CustomSlider extends StatelessWidget {
   const CustomSlider({required this.onSliderSwipe, super.key});
 
-  final Function onSliderSwipe;
+  final void Function() onSliderSwipe;
 
   @override
   Widget build(BuildContext context) {
@@ -26,11 +26,14 @@ class CustomSlider extends StatelessWidget {
           fontWeight: FontWeight.w500,
         ),
       ),
-      icon: const Center(
-        child: Icon(
-          Icons.directions_walk,
-          size: 40,
-          color: Colors.white,
+      icon: Center(
+        child: IconButton(
+          onPressed: onSliderSwipe,
+          icon: const Icon(
+            Icons.directions_walk,
+            size: 40,
+            color: Colors.white,
+          ),
         ),
       ),
     );

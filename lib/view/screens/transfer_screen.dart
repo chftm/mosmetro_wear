@@ -1,11 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mosmetro_wear/bloc/route/route_bloc.dart';
+import 'package:mosmetro_wear/bloc/route/route_event.dart';
 import 'package:mosmetro_wear/data/models/station.dart';
 import 'package:mosmetro_wear/view/widgets/line/line_point.dart';
 import 'package:mosmetro_wear/view/widgets/line/station_widget.dart';
 import 'package:mosmetro_wear/view/widgets/transfer/custom_slider.dart';
 
 class TransferScreen extends StatelessWidget {
-  const TransferScreen({super.key});
+  final Station from;
+  final Station to;
+
+  const TransferScreen({
+    required this.from,
+    required this.to,
+    super.key,
+  });
+
+  void _onSwipe(BuildContext context) {
+    context.read<RouteBloc>().add(const NextStation());
+    Navigator.of(context).pop();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -13,13 +28,13 @@ class TransferScreen extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const StationWidget(
-            station: Station(name: 'Бульвар дмитрия донского', line: 1),
+          StationWidget(
+            station: from,
             routePoint: PointType.number,
           ),
-          CustomSlider(onSliderSwipe: () {}),
-          const StationWidget(
-            station: Station(name: 'Бульвар дмитрия донского', line: 1),
+          CustomSlider(onSliderSwipe: () => _onSwipe(context)),
+          StationWidget(
+            station: to,
             routePoint: PointType.number,
           ),
         ],

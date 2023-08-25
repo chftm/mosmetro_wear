@@ -26,14 +26,11 @@ class CustomSlider extends StatelessWidget {
           fontWeight: FontWeight.w500,
         ),
       ),
-      icon: Center(
-        child: IconButton(
-          onPressed: onSliderSwipe,
-          icon: const Icon(
-            Icons.directions_walk,
-            size: 40,
-            color: Colors.white,
-          ),
+      icon: const Center(
+        child: Icon(
+          Icons.directions_walk,
+          size: 40,
+          color: Colors.white,
         ),
       ),
     );

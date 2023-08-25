@@ -5,9 +5,7 @@ import 'package:mosmetro_wear/view/widgets/line/station_widget.dart';
 import 'package:mosmetro_wear/view/widgets/transfer/custom_slider.dart';
 
 class TransferScreen extends StatelessWidget {
-  const TransferScreen({required this.onSliderSwipe, super.key});
-
-  final Function() onSliderSwipe;
+  const TransferScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +17,7 @@ class TransferScreen extends StatelessWidget {
             station: Station(name: 'Бульвар дмитрия донского', line: 1),
             routePoint: PointType.number,
           ),
-          CustomSlider(onSliderSwipe: onSliderSwipe),
+          CustomSlider(onSliderSwipe: () {}),
           const StationWidget(
             station: Station(name: 'Бульвар дмитрия донского', line: 1),
             routePoint: PointType.number,

@@ -11,7 +11,7 @@ class LineWidget extends StatelessWidget {
 
   const LineWidget({
     required this.routeSegment,
-    this.first = false,
+    this.first = true,
     super.key,
   });
 

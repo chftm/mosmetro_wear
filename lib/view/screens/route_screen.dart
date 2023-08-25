@@ -1,66 +1,55 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mosmetro_wear/bloc/route/route_bloc.dart';
 import 'package:mosmetro_wear/view/widgets/line/line_widget.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class RouteScreen extends StatefulWidget {
+class RouteScreen extends StatelessWidget {
   const RouteScreen({super.key});
 
-  @override
-  State<RouteScreen> createState() => _RouteScreenState();
-}
-
-class _RouteScreenState extends State<RouteScreen> {
-  final controller = PageController(
-    initialPage: 0,
-    keepPage: true,
-    viewportFraction: 1,
-  );
-
-  final List<Widget> pages = [
-    // LineWidget(),
-    // LineWidget(),
-    // LineWidget(),
-  ];
-
-  void onSliderSwipe() {
-    Navigator.pop(context);
-  }
-
-  // showCupertinoModalPopup(
-  //   context: context,
-  //   builder: (ctx) {
-  //     return TransferScreen(
-  //       onSliderSwipe: onSliderSwipe,
-  //     );
-  //   },
-  // );
+  void onSliderSwipe() {}
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: PageView.builder(
-            scrollDirection: Axis.vertical,
+    final state = context.read<RouteBloc>().state;
+
+    final controller = PageController(
+      initialPage: state.currentSegmentIndex,
+    );
+
+    return Scaffold(
+      body: Row(
+        children: [
+          Expanded(
+            child: PageView.builder(
+              scrollDirection: Axis.vertical,
+              controller: controller,
+              itemBuilder: (_, index) {
+                if (index != state.currentSegmentIndex) {
+                  return LineWidget(routeSegment: state.route![index]);
+                }
+
+                return LineWidget(
+                  routeSegment:
+                      state.currentSegment!.sublist(state.currentStationIndex),
+                  first: state.isFirstInSegment,
+                );
+              },
+              itemCount: state.route!.length,
+            ),
+          ),
+          SmoothPageIndicator(
             controller: controller,
-            itemBuilder: (ctx, index) {
-              return pages[index];
-            },
-            itemCount: pages.length,
+            count: state.route!.length,
+            axisDirection: Axis.vertical,
+            effect: const ExpandingDotsEffect(
+              dotWidth: 8,
+              dotHeight: 8,
+              activeDotColor: Colors.white,
+            ),
           ),
-        ),
-        SmoothPageIndicator(
-          controller: controller,
-          count: pages.length,
-          axisDirection: Axis.vertical,
-          effect: const ExpandingDotsEffect(
-            dotWidth: 8,
-            dotHeight: 8,
-            activeDotColor: Colors.white,
-            dotColor: Colors.grey,
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

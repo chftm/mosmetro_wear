@@ -3,34 +3,41 @@ import 'package:mosmetro_wear/data/models/station.dart';
 
 @immutable
 final class RouteState {
-  final List<Station>? route;
+  final List<List<Station>>? route;
+  final int currentSegmentIndex;
   final int currentStationIndex;
 
-  Station? get currentStation => route?[currentStationIndex];
+  List<Station>? get currentSegment => route?[currentSegmentIndex];
+  Station? get currentStation => currentSegment?[currentStationIndex];
 
   bool get routeExists => route != null;
 
   bool get isLastStation =>
-      routeExists && currentStationIndex == route!.length - 1;
+      routeExists &&
+      currentSegmentIndex == route!.length - 1 &&
+      currentStationIndex == currentSegment!.length - 1;
 
   bool get isTransfer =>
       routeExists &&
-      !isLastStation &&
-      currentStation!.line != route![currentStationIndex + 1].line;
+      currentSegmentIndex != route!.length - 1 &&
+      currentStationIndex == currentSegment!.length - 1;
 
-  bool get isFirstInSegment =>
-      routeExists &&
-      (currentStationIndex == 0 ||
-          currentStation!.line != route![currentStationIndex - 1].line);
+  bool get isFirstInSegment => currentStationIndex == 0;
 
   const RouteState({
     required this.route,
+    this.currentSegmentIndex = 0,
     this.currentStationIndex = 0,
   });
 
-  RouteState copyWith({List<Station>? route, int? currentStationIndex}) {
+  RouteState copyWith({
+    List<List<Station>>? route,
+    int? currentSegmentIndex,
+    int? currentStationIndex,
+  }) {
     return RouteState(
       route: route ?? this.route,
+      currentSegmentIndex: currentSegmentIndex ?? this.currentSegmentIndex,
       currentStationIndex: currentStationIndex ?? this.currentStationIndex,
     );
   }

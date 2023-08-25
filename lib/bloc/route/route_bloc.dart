@@ -21,12 +21,18 @@ final class RouteBloc extends Bloc<RouteEvent, RouteState> {
 
     if (state.isLastStation) {
       emit(const RouteState(route: null));
-    } else {
+    } else if (state.isTransfer) {
       emit(
         state.copyWith(
-          currentStationIndex: state.currentStationIndex + 1,
+          currentSegmentIndex: state.currentSegmentIndex + 1,
+          currentStationIndex: 0,
         ),
       );
     }
+    emit(
+      state.copyWith(
+        currentStationIndex: state.currentStationIndex + 1,
+      ),
+    );
   }
 }

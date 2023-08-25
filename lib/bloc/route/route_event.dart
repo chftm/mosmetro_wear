@@ -7,7 +7,7 @@ sealed class RouteEvent {
 }
 
 final class RouteStarted extends RouteEvent {
-  final List<Station> route;
+  final List<List<Station>> route;
 
   const RouteStarted(this.route);
 }

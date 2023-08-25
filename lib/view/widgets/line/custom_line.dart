@@ -14,7 +14,7 @@ class CustomLine extends CustomPainter {
   // ignore: long-method
   void paint(Canvas canvas, Size size) {
     final linePaint = Paint()
-      ..color = Colors.lightBlue
+      ..color = color
       ..strokeWidth = 8
       ..strokeCap = StrokeCap.round;
 

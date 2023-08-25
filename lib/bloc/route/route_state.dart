@@ -14,15 +14,22 @@ final class RouteState {
 
   bool get isLastStation =>
       routeExists &&
-      currentSegmentIndex == route!.length - 1 &&
+      _isLastSegment &&
       currentStationIndex == currentSegment!.length - 1;
+
+  bool get isBeforeLast =>
+      routeExists &&
+      _isLastSegment &&
+      currentStationIndex == currentSegment!.length - 2;
 
   bool get isTransfer =>
       routeExists &&
-      currentSegmentIndex != route!.length - 1 &&
+      !_isLastSegment &&
       currentStationIndex == currentSegment!.length - 1;
 
   bool get isFirstInSegment => currentStationIndex == 0;
+
+  bool get _isLastSegment => currentSegmentIndex == route!.length - 1;
 
   const RouteState({
     required this.route,

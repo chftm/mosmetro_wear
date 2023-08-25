@@ -19,7 +19,7 @@ final class RouteBloc extends Bloc<RouteEvent, RouteState> {
   void _onNextStation(Emitter<RouteState> emit) {
     if (state.route == null) return;
 
-    if (state.isLastStation) {
+    if (state.isLastStation || state.isBeforeLast) {
       emit(const RouteState(route: null));
     } else if (state.isTransfer) {
       emit(
@@ -28,11 +28,12 @@ final class RouteBloc extends Bloc<RouteEvent, RouteState> {
           currentStationIndex: 0,
         ),
       );
+    } else {
+      emit(
+        state.copyWith(
+          currentStationIndex: state.currentStationIndex + 1,
+        ),
+      );
     }
-    emit(
-      state.copyWith(
-        currentStationIndex: state.currentStationIndex + 1,
-      ),
-    );
   }
 }

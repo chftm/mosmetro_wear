@@ -4,6 +4,7 @@ import 'package:mosmetro_wear/bloc/movement/movement_bloc.dart';
 import 'package:mosmetro_wear/bloc/route/route_bloc.dart';
 import 'package:mosmetro_wear/data/movement/movement_repository.dart';
 import 'package:mosmetro_wear/view/custom_router.dart';
+import 'package:mosmetro_wear/view/watch_wrapper.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -18,13 +19,13 @@ class App extends StatelessWidget {
         BlocProvider<MovementBloc>(
           create: (_) => MovementBloc(
             const MovementRepository(
-              thresholdVelocity: 1,
+              thresholdVelocity: 10,
             ),
           )..add(const StartMovementTracking()),
         ),
       ],
       child: MaterialApp(
-        home: const CustomRouter(),
+        home: const WatchWrapper(child: CustomRouter()),
         theme: ThemeData(
           useMaterial3: true,
           visualDensity: VisualDensity.compact,
